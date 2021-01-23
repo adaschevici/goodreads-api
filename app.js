@@ -52,10 +52,6 @@ app.use("/api/ratings", (req, res, next) => {
       id: 9780439554930,
       rating: 4.44,
     },
-    {
-      id: 9780316015840,
-      rating: 3.57,
-    },
   ]);
 });
 
@@ -69,10 +65,6 @@ app.use("/api/images", (req, res, next) => {
       id: 9780439554930,
       image: "https://images.gr-assets.com/books/1474154022m/3.jpg",
     },
-    {
-      id: 9780316015840,
-      image: "https://images.gr-assets.com/books/1361039443m/41865.jpg",
-    },
   ]);
 });
 app.use("/api/book-progress/:username", (req, res, next) => {
@@ -84,10 +76,6 @@ app.use("/api/book-progress/:username", (req, res, next) => {
     },
     {
       id: 9780439554930,
-      progress: 0,
-    },
-    {
-      id: 9780316015840,
       progress: 0,
     },
   ]);
