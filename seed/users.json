@@ -1,11 +1,9 @@
-{
-  "users": [
-    {
-      "id": "artur@gmail.com",
-      "fullName": "Artur Das",
-      "email": "artur@gmail.com",
-      "passwordHash": "$2b$12$V2HDFlR31Ll9x1nXDutNfOm3FQKEEDYMtSqBt4M0JnFFx.bhZk7ie",
-      "created": "1611423327770"
-    }
-  ]
-}
+[
+  {
+    "id": "artur@gmail.com",
+    "fullName": "Artur Das",
+    "email": "artur@gmail.com",
+    "passwordHash": "$2b$12$V2HDFlR31Ll9x1nXDutNfOm3FQKEEDYMtSqBt4M0JnFFx.bhZk7ie",
+    "created": "1611423327770"
+  }
+]

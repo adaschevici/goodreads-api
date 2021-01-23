@@ -5,17 +5,20 @@ var mongoose = require("mongoose"),
   bcrypt = require("bcrypt"),
   User = mongoose.model("User");
 
-exports.register = function (req, res) {
-  var newUser = new User(req.body);
-  newUser.hash_password = bcrypt.hashSync(req.body.password, 10);
+exports.register = async function (userData) {
+  const { fullName, email, password } = userData;
+  var newUser = new User({ fullName, email });
+  newUser.passwordHash = bcrypt.hashSync(userData.password, 10);
   newUser.save(function (err, user) {
     if (err) {
-      return res.status(400).send({
+      console.log(err);
+      return {
         message: err,
-      });
+      };
     } else {
       user.hash_password = undefined;
-      return res.json(user);
+      console.log(user);
+      return user;
     }
   });
 };

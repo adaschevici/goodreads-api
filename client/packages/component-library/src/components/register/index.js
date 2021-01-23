@@ -8,6 +8,7 @@ const { Body } = typography
 
 export default class Register extends Component {
   state = {
+    fullName: '',
     email: '',
     password: '',
     rePassword: '',
@@ -21,7 +22,7 @@ export default class Register extends Component {
 
   render() {
     const { onRegister } = this.props
-    const { email, password } = this.state
+    const { fullName, email, password, rePassword } = this.state
     return (
       <Flex
         alignItems="center"
@@ -38,13 +39,12 @@ export default class Register extends Component {
             }}
           >
             <Box p={2}>
-              <Label htmlFor="email">
+              <Label htmlFor="fullName">
                 <Body lineHeight={0}>Full Name</Body>
               </Label>
               <Input
-                id="email"
-                name="email"
-                type="email"
+                id="fullName"
+                name="fullName"
                 placeholder="Jane Doe"
                 onChange={this.handleChange}
                 sx={{
@@ -86,12 +86,12 @@ export default class Register extends Component {
               />
             </Box>
             <Box p={2}>
-              <Label htmlFor="Password">
+              <Label htmlFor="rePassword">
                 <Body lineHeight={0}>Confirm Password</Body>
               </Label>
               <Input
-                id="re-password"
-                name="re-password"
+                id="rePassword"
+                name="rePassword"
                 type="password"
                 placeholder="confirm the password..."
                 onChange={this.handleChange}
@@ -105,7 +105,9 @@ export default class Register extends Component {
               <Button
                 width={[1]}
                 mr={2}
-                onClick={() => onRegister(email, password)}
+                onClick={() =>
+                  onRegister(fullName, email, password, rePassword)
+                }
                 sx={{ backgroundColor: theme.colors.blues[1] }}
               >
                 Register

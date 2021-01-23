@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "server": "nodemon -e js ./bin/www --ignore tests",
+    "server": "nodemon -e js --trace-deprecation ./bin/www --ignore tests",
     "client": "npm run start:app --prefix client",
     "dev": "npm-run-all --parallel server client",
     "bootstrap": "npm install --prefix client && npm run bootstrap --prefix client && npm run build:components --prefix client",
@@ -19,8 +19,7 @@
     "http-errors": "~1.6.3",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.11.13",
-    "morgan": "~1.9.1",
-    "pug": "2.0.0-beta11"
+    "morgan": "~1.9.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.7",

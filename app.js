@@ -6,11 +6,13 @@ var logger = require("morgan");
 var mongoose = require("mongoose");
 require("dotenv").config();
 
-const User = require("./models/user");
-var indexRouter = require("./routes/index");
-var userRouter = require("./routes/user");
+const mongoURI = process.env.MONGO_URI;
+const mongoPort = process.env.MONGO_PORT;
+const mongoUser = process.env.MONGO_USER;
+const mongoPass = process.env.MONGO_PASSWORD;
+const mongoDbName = process.env.MONGO_DB_NAME;
 
-var app = express();
+require("./models/user");
 const option = {
   socketTimeoutMS: 30000,
   keepAlive: true,
@@ -18,25 +20,21 @@ const option = {
   useUnifiedTopology: true,
 };
 
-const mongoURI = process.env.MONGODB_URI;
-const mongoPort = process.env.MONGO_PORT;
-const mongoUser = process.env.MONGO_USER;
-const mongoPass = process.env.MONGO_PASSWORD;
-const mongoDbName = process.env.MONGO_DB_NAME;
+(async () => {
+  try {
+    await mongoose.connect(
+      `mongodb://${mongoUser}:${mongoPass}@${mongoURI}:${mongoPort}/${mongoDbName}?authSource=${mongoDbName}`,
+      option
+    );
+  } catch (error) {
+    console.log("Failed to connect to mongodb");
+  }
+})();
 
-mongoose
-  .connect(
-    `mongodb://${mongoUser}:${mongoPass}@${mongoURI}:${mongoPort}/${mongoDbName}?authSource=${mongoDbName}`,
-    option
-  )
-  .then(
-    function () {
-      //connected successfully
-    },
-    function (err) {
-      //err handle
-    }
-  );
+var indexRouter = require("./routes/index");
+var userRouter = require("./routes/user");
+
+var app = express();
 
 app.use(logger("dev"));
 app.use(express.json());

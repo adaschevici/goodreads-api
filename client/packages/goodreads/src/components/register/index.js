@@ -14,9 +14,9 @@ class DashboardRegister extends Component {
     onRegister: PropTypes.func.isRequired,
   }
 
-  handleRegister = (username, password) => {
+  handleRegister = (fullName, username, password, rePassword) => {
     const { dispatch } = this.props
-    return dispatch(doRegister(username, password))
+    return dispatch(doRegister(fullName, username, password, rePassword))
   }
 
   render() {

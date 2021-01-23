@@ -10,9 +10,12 @@ import {
   CHECK_AUTH_FAILED,
 } from '../../containers/auth-checker/actions'
 
-const stripStatus = (message) => {
+const stripStatus = message => {
   const status = new RegExp(/\d{3}/g)
-  return +message.match(status)[0]
+  if (message.match(status)) {
+    return +message.match(status)[0]
+  }
+  return status
 }
 export const watchLogin = function* watchPerformLogin({ payload }) {
   try {
@@ -42,8 +45,8 @@ export const watchRegistration = function* watchPerformRegistration({
   payload,
 }) {
   try {
+    console.log(payload)
     const { data } = yield call(api.createUser, payload)
-    console.log(data)
     yield put({
       type: REGISTRATION_SUCCEEDED,
       payload: {
@@ -51,6 +54,7 @@ export const watchRegistration = function* watchPerformRegistration({
       },
     })
   } catch (e) {
+    console.log(e)
     const status = stripStatus(e.message)
     const errorMessageMap = {
       500: 'User already exists',
