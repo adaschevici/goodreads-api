@@ -3,12 +3,40 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
+var mongoose = require("mongoose");
 require("dotenv").config();
 
+const User = require("./models/user");
 var indexRouter = require("./routes/index");
 var userRouter = require("./routes/user");
 
 var app = express();
+const option = {
+  socketTimeoutMS: 30000,
+  keepAlive: true,
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+};
+
+const mongoURI = process.env.MONGODB_URI;
+const mongoPort = process.env.MONGO_PORT;
+const mongoUser = process.env.MONGO_USER;
+const mongoPass = process.env.MONGO_PASSWORD;
+const mongoDbName = process.env.MONGO_DB_NAME;
+
+mongoose
+  .connect(
+    `mongodb://${mongoUser}:${mongoPass}@${mongoURI}:${mongoPort}/${mongoDbName}?authSource=${mongoDbName}`,
+    option
+  )
+  .then(
+    function () {
+      //connected successfully
+    },
+    function (err) {
+      //err handle
+    }
+  );
 
 app.use(logger("dev"));
 app.use(express.json());
