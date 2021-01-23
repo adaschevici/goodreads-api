@@ -17,6 +17,20 @@ app.use(cookieParser());
 
 app.use("/", indexRouter);
 app.use("/auth", userRouter);
+app.use("/api/meta", (req, res, next) => {
+  res.send("from meta");
+  console.log("bla");
+});
+
+app.use("/api/ratings", (req, res, next) => {
+  res.send("from meta");
+  console.log("bla");
+});
+
+app.use("/api/images", (req, res, next) => {
+  res.send("from images");
+  console.log("bla");
+});
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

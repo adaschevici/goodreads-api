@@ -9,4 +9,8 @@ router.post("/register", function (req, res, next) {
   res.send({ msg: "Great Success REGISTER" });
 });
 
+router.post("/check-token", function (req, res, next) {
+  res.send({ msg: "Great Success CHECK TOKEN" });
+});
+
 module.exports = router;

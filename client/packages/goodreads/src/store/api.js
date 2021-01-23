@@ -7,15 +7,15 @@ const client = axios.create({
 })
 
 export function fetchMeta() {
-  return client.get('/meta')
+  return client.get('/api/meta')
 }
 
 export function fetchRating() {
-  return client.get('/ratings')
+  return client.get('/api/ratings')
 }
 
 export function fetchImages() {
-  return client.get('/images')
+  return client.get('/api/images')
 }
 
 export function createUser({ email, password }) {
@@ -31,5 +31,5 @@ export function checkToken() {
 }
 
 export function fetchBooksInProgress({ username }) {
-  return client.get(`/book-progress/${username}`)
+  return client.get(`/api/book-progress/${username}`)
 }
