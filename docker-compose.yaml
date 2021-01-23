@@ -1,13 +1,21 @@
 version: '3.1'
 services:
-    mongo-db:
+    mongodb:
         image: mongo
         ports:
-            - '${MONGO_PORT}:27017'
+          - '${MONGO_PORT}:27017'
+        environment:
+          - MONGO_INITDB_DATABASE=goodreads-db
+        volumes:
+          - ./seed/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+          - ./seed/data.huge.json:/docker-entrypoint-initdb.d/data.huge.json:ro
+          - ./seed/users.json:/docker-entrypoint-initdb.d/users.json:ro
+          - ./seed/init.sh:/docker-entrypoint-initdb.d/setup-db.sh:ro
+          - ./seed/mongo-volume:/data/db
     redis:
         image: redis
         ports:
-            - '${REDIS_PORT}:6379'
+          - '${REDIS_PORT}:6379'
 
     rc:
         image: rediscommander/redis-commander:latest
