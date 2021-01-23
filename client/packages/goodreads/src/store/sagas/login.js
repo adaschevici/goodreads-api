@@ -10,7 +10,7 @@ import {
   CHECK_AUTH_FAILED,
 } from '../../containers/auth-checker/actions'
 
-const stripStatus = message => {
+const stripStatus = (message) => {
   const status = new RegExp(/\d{3}/g)
   return +message.match(status)[0]
 }
@@ -80,14 +80,5 @@ export const watchAuth = function* watchAuthCheck() {
         error: 'Not authenticated',
       },
     })
-  }
-}
-
-export const watchRealApiRequest = function* watchRealApiRequest() {
-  try {
-    const { data } = yield call(api.checkRealApi)
-    console.log(data)
-  } catch (e) {
-    console.log('Failed')
   }
 }

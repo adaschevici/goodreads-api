@@ -1,17 +1,15 @@
 import { Component } from 'react'
-import { checkAuth, checkRealApi } from './actions'
+import { checkAuth } from './actions'
 import { connect } from 'react-redux'
 
 class AuthCheck extends Component {
   componentDidMount() {
     const { dispatch } = this.props
-    checkRealApi()
     return dispatch(checkAuth())
   }
 
   componentDidUpdate() {
     const { dispatch } = this.props
-    checkRealApi()
     dispatch(checkAuth())
   }
   render() {

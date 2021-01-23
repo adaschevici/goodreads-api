@@ -23,16 +23,13 @@ export function createUser({ email, password }) {
 }
 
 export function authenticateUser({ email, password }) {
-  return client.post('/auth/authenticate', { email, password })
+  return client.post('/user/login', { email, password })
 }
 
 export function checkToken() {
   return client.post('/auth/check-token')
 }
 
-export function checkRealApi() {
-  return client.get('/user/login')
-}
 export function fetchBooksInProgress({ username }) {
   return client.get(`/book-progress/${username}`)
 }
