@@ -1,14 +1,19 @@
 {
   "name": "goodreads-api",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "nodemon -e js,pug ./bin/www"
+    "server": "nodemon -e js ./bin/www --ignore tests",
+    "client": "npm run start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "build": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "dependencies": {
     "bcrypt": "^5.0.0",
+    "concurrently": "^5.3.0",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
+    "dotenv": "^8.2.0",
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
     "mongoose": "^5.11.13",
@@ -16,6 +21,7 @@
     "pug": "2.0.0-beta11"
   },
   "devDependencies": {
-    "nodemon": "^2.0.7"
+    "nodemon": "^2.0.7",
+    "prettier": "^2.2.1"
   }
 }
