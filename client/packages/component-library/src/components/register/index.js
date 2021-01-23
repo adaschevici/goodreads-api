@@ -39,6 +39,22 @@ export default class Register extends Component {
           >
             <Box p={2}>
               <Label htmlFor="email">
+                <Body lineHeight={0}>Full Name</Body>
+              </Label>
+              <Input
+                id="email"
+                name="email"
+                type="email"
+                placeholder="Jane Doe"
+                onChange={this.handleChange}
+                sx={{
+                  borderRadius: 5,
+                  borderColor: '#DCDCDC',
+                }}
+              />
+            </Box>
+            <Box p={2}>
+              <Label htmlFor="email">
                 <Body lineHeight={0}>Email</Body>
               </Label>
               <Input

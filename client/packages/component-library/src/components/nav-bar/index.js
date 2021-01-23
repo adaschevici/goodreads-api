@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { Box, Flex } from 'rebass'
 import { Link } from 'react-router-dom'
 import { typography } from '../../typography'
@@ -20,11 +20,19 @@ export default ({ authenticated, username }) => (
         </Artifika>
       </Link>
     ) : (
-      <Link to="/login">
-        <Artifika p={2} fontWeight="bold">
-          Login
-        </Artifika>
-      </Link>
+      <Fragment>
+        <Link to="/login">
+          <Artifika p={2} fontWeight="bold">
+            Login
+          </Artifika>
+        </Link>
+        <Artifika>/</Artifika>
+        <Link to="/register">
+          <Artifika p={2} fontWeight="bold">
+            Register
+          </Artifika>
+        </Link>
+      </Fragment>
     )}
   </Flex>
 )
