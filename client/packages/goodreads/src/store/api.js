@@ -23,7 +23,7 @@ export function createUser({ email, password }) {
 }
 
 export function authenticateUser({ email, password }) {
-  return client.post('/user/login', { email, password })
+  return client.post('/auth/login', { email, password })
 }
 
 export function checkToken() {
