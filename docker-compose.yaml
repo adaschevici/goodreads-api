@@ -1,0 +1,19 @@
+version: '3.1'
+services:
+    mongo-db:
+        image: mongo
+        ports:
+            - '${MONGO_PORT}:27017'
+    redis:
+        image: redis
+        ports:
+            - '${REDIS_PORT}:6379'
+
+    rc:
+        image: rediscommander/redis-commander:latest
+        ports:
+            - '8081:8081'
+        environment:
+            - REDIS_HOSTS=redis
+        depends_on:
+            - redis
