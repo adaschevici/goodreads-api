@@ -8,16 +8,14 @@ const mongoose = require("mongoose"),
 exports.register = async function (userData) {
   const { fullName, email, password } = userData;
   const newUser = new User({ fullName, email });
-  newUser.passwordHash = bcrypt.hashSync(userData.password, 10);
+  newUser.passwordHash = bcrypt.hashSync(password, 10);
   newUser.save(function (err, user) {
     if (err) {
-      console.log(err);
       return {
         message: err,
       };
     } else {
-      user.hash_password = undefined;
-      console.log(user);
+      user.passwordHash = undefined;
       return user;
     }
   });
