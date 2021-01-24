@@ -1,5 +1,9 @@
 import React, { Component, Fragment } from 'react'
-import { fetchBooks, fetchBooksInProgress } from './actions'
+import {
+  fetchBooks,
+  fetchBooksInProgress,
+  updateBooksInProgress,
+} from './actions'
 import { connect } from 'react-redux'
 import { components, typography } from '@goodreads-v2/component-library'
 import { getBooks, getBooksProgress } from './selectors'
@@ -14,7 +18,7 @@ class BookList extends Component {
     booksInProgress: [],
   }
 
-  componentDidUpdate = prevProps => {
+  componentDidUpdate = (prevProps) => {
     const { username: prevUsername } = prevProps
     const { dispatch, username } = this.props
     if (prevUsername !== username) {
@@ -30,6 +34,12 @@ class BookList extends Component {
     }
   }
 
+  updateProgress = (bookId, value) => {
+    const { dispatch, username } = this.props
+    console.log(`Updated progress ${bookId} with ${value}`)
+    dispatch(updateBooksInProgress(username, bookId, value))
+  }
+
   render() {
     const { books, booksInProgress, authenticated } = this.props
     return (
@@ -39,10 +49,11 @@ class BookList extends Component {
             <Artifika>Currently reading</Artifika>
             {booksInProgress.length ? (
               <BookGrid>
-                {booksInProgress.map(book => (
+                {booksInProgress.map((book) => (
                   <BookCard
                     key={`${book.id}${book.title}`}
                     authenticated={authenticated}
+                    onStarted={this.updateProgress}
                     {...book}
                   />
                 ))}
@@ -56,10 +67,11 @@ class BookList extends Component {
         )}
         <Artifika>Books</Artifika>
         <BookGrid>
-          {books.map(book => (
+          {books.map((book) => (
             <BookCard
               key={`${book.id}${book.title}`}
               authenticated={authenticated}
+              onStarted={this.updateProgress}
               {...book}
             />
           ))}

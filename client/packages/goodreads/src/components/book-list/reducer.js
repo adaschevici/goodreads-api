@@ -14,6 +14,9 @@ import {
   FETCH_BOOKS_IN_PROGRESS_REQUEST,
   FETCH_BOOKS_IN_PROGRESS_SUCCEEDED,
   FETCH_BOOKS_IN_PROGRESS_FAILED,
+  UPDATE_BOOKS_IN_PROGRESS_REQUEST,
+  UPDATE_BOOKS_IN_PROGRESS_SUCCEEDED,
+  UPDATE_BOOKS_IN_PROGRESS_FAILED,
 } from './actions'
 
 const initialState = {
@@ -104,6 +107,26 @@ export default function books(state = initialState, action) {
       }
     }
     case FETCH_BOOKS_IN_PROGRESS_FAILED: {
+      return {
+        ...state,
+        isLoadingBIP: false,
+        errorBIP: action.payload.error,
+      }
+    }
+    case UPDATE_BOOKS_IN_PROGRESS_REQUEST: {
+      return {
+        ...state,
+        isLoadingBIP: true,
+      }
+    }
+    case UPDATE_BOOKS_IN_PROGRESS_SUCCEEDED: {
+      return {
+        ...state,
+        booksInProgress: action.payload.booksInProgress,
+        isLoadingBIP: false,
+      }
+    }
+    case UPDATE_BOOKS_IN_PROGRESS_FAILED: {
       return {
         ...state,
         isLoadingBIP: false,

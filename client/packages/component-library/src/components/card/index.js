@@ -23,7 +23,7 @@ export default ({
   description,
   rating,
   onStarted,
-  bookId,
+  id,
   authenticated,
 }) => (
   <Box width={1}>
@@ -43,7 +43,7 @@ export default ({
               id="book-action"
               name="book-action"
               defaultValue="not-started"
-              onChange={(evt) => onStarted(bookId, evt.target.value)}
+              onChange={(evt) => onStarted(id, evt.target.value)}
               sx={{
                 borderRadius: 5,
               }}

@@ -36,5 +36,9 @@ export function checkToken() {
 }
 
 export function fetchBooksInProgress({ username }) {
-  return client.get(`/api/book-progress/${username}`)
+  return client.get(`/api/books/progress/${username}`)
+}
+
+export function updateBooksInProgress({ username, id, progress }) {
+  return client.post(`/api/books/progress/${username}`, { id, progress })
 }

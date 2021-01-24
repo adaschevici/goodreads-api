@@ -22,6 +22,39 @@ module.exports = (app) => {
     }
   });
 
+  app.get("/api/books/progress/:username", (req, res, next) => {
+    username = req.params.username;
+    console.log(username);
+    res.send([
+      {
+        id: 9780439023480,
+        progress: 0,
+      },
+      {
+        id: 9780439554930,
+        progress: 0,
+      },
+    ]);
+  });
+
+  app.post("/api/books/progress/:username", (req, res, next) => {
+    username = req.params.username;
+    const { id, progress } = req.body;
+
+    console.log(progress, id);
+
+    res.send([
+      {
+        id: 9780439023480,
+        progress: 0,
+      },
+      {
+        id: 9780439554930,
+        progress: 0,
+      },
+    ]);
+  });
+
   app.get("/api/ratings", async (req, res, next) => {
     const ratings = await Rating.find({}).limit(100);
     res.send(ratings);

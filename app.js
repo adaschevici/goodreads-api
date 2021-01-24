@@ -49,20 +49,6 @@ app.use("/", indexRouter);
 require("./routes/user")(app);
 require("./routes/book")(app);
 
-app.use("/api/book-progress/:username", (req, res, next) => {
-  username = req.params.id;
-  res.send([
-    {
-      id: 9780439023480,
-      progress: 0,
-    },
-    {
-      id: 9780439554930,
-      progress: 0,
-    },
-  ]);
-});
-
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
