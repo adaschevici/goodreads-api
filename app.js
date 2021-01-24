@@ -16,6 +16,7 @@ require("./models/user");
 require("./models/book");
 require("./models/image");
 require("./models/rating");
+require("./services/cache");
 
 const option = {
   socketTimeoutMS: 30000,
