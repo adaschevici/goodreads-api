@@ -23,6 +23,7 @@ const initialState = {
   meta: [],
   ratings: [],
   images: [],
+  booksInProgress: [],
   isLoadingMeta: false,
   isLoadingRatings: false,
   isLoadingImages: false,

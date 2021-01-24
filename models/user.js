@@ -25,6 +25,12 @@ const userSchema = new Schema({
     type: Date,
     default: Date.now,
   },
+  booksInProgress: [
+    {
+      book_id: Number,
+      progress: String,
+    },
+  ],
 });
 
 userSchema.methods.comparePassword = function (password) {

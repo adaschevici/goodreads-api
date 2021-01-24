@@ -7,6 +7,10 @@ import {
   FETCH_IMAGES_FAILED,
   FETCH_RATINGS_SUCCEEDED,
   FETCH_RATINGS_FAILED,
+  FETCH_BOOKS_IN_PROGRESS_SUCCEEDED,
+  FETCH_BOOKS_IN_PROGRESS_FAILED,
+  UPDATE_BOOKS_IN_PROGRESS_SUCCEEDED,
+  UPDATE_BOOKS_IN_PROGRESS_FAILED,
 } from '../../components/book-list/actions'
 
 export const watchBookMeta = function* watchFetchMeta() {
@@ -49,6 +53,40 @@ export const watchBookRatings = function* watchFetchRatings() {
   } catch (e) {
     yield put({
       type: FETCH_RATINGS_FAILED,
+      payload: { error: e.message },
+    })
+  }
+}
+
+export const watchBooksProgress = function* watchFetchBookProgress({
+  payload,
+}) {
+  try {
+    const { data } = yield call(api.fetchBooksInProgress, payload)
+    yield put({
+      type: FETCH_BOOKS_IN_PROGRESS_SUCCEEDED,
+      payload: { booksInProgress: data },
+    })
+  } catch (e) {
+    yield put({
+      type: FETCH_BOOKS_IN_PROGRESS_FAILED,
+      payload: { error: e.message },
+    })
+  }
+}
+
+export const watchBooksProgressUpdate = function* watchFetchBookProgressUpdate({
+  payload,
+}) {
+  try {
+    const { data } = yield call(api.updateBooksInProgress, payload)
+    yield put({
+      type: UPDATE_BOOKS_IN_PROGRESS_SUCCEEDED,
+      payload: { booksInProgress: data },
+    })
+  } catch (e) {
+    yield put({
+      type: UPDATE_BOOKS_IN_PROGRESS_FAILED,
       payload: { error: e.message },
     })
   }

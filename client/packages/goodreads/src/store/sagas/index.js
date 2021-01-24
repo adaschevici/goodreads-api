@@ -8,8 +8,8 @@ import { LOGIN_REQUEST } from '../../components/login/actions'
 import { REGISTRATION_REQUEST } from '../../components/register/actions'
 import { CHECK_AUTH_REQUEST } from '../../containers/auth-checker/actions'
 import { watchBooks } from './books'
-import { watchBooksProgress } from './booksInProgress'
-import { watchBooksProgressUpdate } from './booksInProgress'
+import { watchBooksProgress } from './books'
+import { watchBooksProgressUpdate } from './books'
 import { watchLogin, watchRegistration, watchAuth } from './login'
 
 export default function* rootSaga() {

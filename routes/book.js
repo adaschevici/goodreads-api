@@ -4,6 +4,7 @@ const cleanCache = require("../middlewares/cleanCache");
 const Book = mongoose.model("Book");
 const Rating = mongoose.model("Rating");
 const Image = mongoose.model("Image");
+const User = mongoose.model("User");
 
 const { save } = require("../services/book.js");
 
@@ -22,37 +23,32 @@ module.exports = (app) => {
     }
   });
 
-  app.get("/api/books/progress/:username", (req, res, next) => {
+  app.get("/api/books/progress/:username", async (req, res, next) => {
     username = req.params.username;
-    console.log(username);
-    res.send([
-      {
-        id: 9780439023480,
-        progress: 0,
-      },
-      {
-        id: 9780439554930,
-        progress: 0,
-      },
-    ]);
+    try {
+      const user = await User.findOne({ email: req.params.username });
+      res.send(user.booksInProgress);
+    } catch (err) {
+      console.log(err);
+      res.status(400).send(err);
+    }
   });
 
-  app.post("/api/books/progress/:username", (req, res, next) => {
+  app.post("/api/books/progress/:username", async (req, res, next) => {
     username = req.params.username;
     const { id, progress } = req.body;
-
     console.log(progress, id);
-
-    res.send([
-      {
-        id: 9780439023480,
-        progress: 0,
-      },
-      {
-        id: 9780439554930,
-        progress: 0,
-      },
-    ]);
+    try {
+      await User.updateOne(
+        { email: req.params.username },
+        { $push: { booksInProgress: { book_id: id, progress } } }
+      );
+      const user = await User.findOne({ email: req.params.username });
+      res.send(user.booksInProgress);
+    } catch (err) {
+      console.log(err);
+      res.status(400).send(err);
+    }
   });
 
   app.get("/api/ratings", async (req, res, next) => {
