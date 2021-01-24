@@ -36,11 +36,11 @@ module.exports = (app) => {
   app.get("/api/ratings", (req, res, next) => {
     res.send([
       {
-        id: 9780439023480,
+        book_id: 9780439023480,
         rating: 4.34,
       },
       {
-        id: 9780439554930,
+        book_id: 9780439554930,
         rating: 4.44,
       },
     ]);
@@ -49,11 +49,11 @@ module.exports = (app) => {
   app.get("/api/images", (req, res, next) => {
     res.send([
       {
-        id: 9780439023480,
+        book_id: 9780439023480,
         url: "https://images.gr-assets.com/books/1447303603m/2767052.jpg",
       },
       {
-        id: 9780439554930,
+        book_id: 9780439554930,
         url: "https://images.gr-assets.com/books/1474154022m/3.jpg",
       },
     ]);

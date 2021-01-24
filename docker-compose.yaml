@@ -1,27 +1,29 @@
-version: '3.1'
+version: "3.1"
 services:
-    mongodb:
-        image: mongo
-        ports:
-          - '${MONGO_PORT}:27017'
-        environment:
-          - MONGO_INITDB_DATABASE=goodreads-db
-        volumes:
-          - ./seed/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
-          - ./seed/data.huge.json:/docker-entrypoint-initdb.d/data.huge.json:ro
-          - ./seed/users.json:/docker-entrypoint-initdb.d/users.json:ro
-          - ./seed/init.sh:/docker-entrypoint-initdb.d/setup-db.sh:ro
-          - ./seed/mongo-volume:/data/db
-    redis:
-        image: redis
-        ports:
-          - '${REDIS_PORT}:6379'
+  mongodb:
+    image: mongo
+    ports:
+      - "${MONGO_PORT}:27017"
+    environment:
+      - MONGO_INITDB_DATABASE=goodreads-db
+    volumes:
+      - ./seed/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+      - ./seed/books.json:/docker-entrypoint-initdb.d/books.json:ro
+      - ./seed/images.json:/docker-entrypoint-initdb.d/images.json:ro
+      - ./seed/ratings.json:/docker-entrypoint-initdb.d/ratings.json:ro
+      - ./seed/users.json:/docker-entrypoint-initdb.d/users.json:ro
+      - ./seed/init.sh:/docker-entrypoint-initdb.d/setup-db.sh:ro
+      - ./seed/mongo-volume:/data/db
+  redis:
+    image: redis
+    ports:
+      - "${REDIS_PORT}:6379"
 
-    rc:
-        image: rediscommander/redis-commander:latest
-        ports:
-            - '8081:8081'
-        environment:
-            - REDIS_HOSTS=redis
-        depends_on:
-            - redis
+  rc:
+    image: rediscommander/redis-commander:latest
+    ports:
+      - "8081:8081"
+    environment:
+      - REDIS_HOSTS=redis
+    depends_on:
+      - redis

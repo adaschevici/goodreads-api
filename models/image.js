@@ -6,7 +6,7 @@ const { Schema } = mongoose;
  */
 const imageSchema = new Schema({
   url: String,
-  id: { type: Number, ref: "Book" },
+  book_id: Number,
 });
 
 mongoose.model("Image", imageSchema);

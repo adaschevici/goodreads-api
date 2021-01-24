@@ -5,7 +5,7 @@ const { Schema } = mongoose;
  * Book Schema
  */
 const bookSchema = new Schema({
-  id: { type: Number, unique: true },
+  id: Number,
   isbn: {
     type: String,
     unique: true,
@@ -19,9 +19,9 @@ const bookSchema = new Schema({
     required: true,
   },
   authors: String,
+  year: Number,
   title: String,
   description: String,
-  year: Number,
 });
 
 mongoose.model("Book", bookSchema);
