@@ -1,9 +1,9 @@
-var createError = require("http-errors");
-var express = require("express");
-var path = require("path");
-var cookieParser = require("cookie-parser");
-var logger = require("morgan");
-var mongoose = require("mongoose");
+const createError = require("http-errors");
+const express = require("express");
+const path = require("path");
+const cookieParser = require("cookie-parser");
+const logger = require("morgan");
+const mongoose = require("mongoose");
 require("dotenv").config();
 
 const mongoURI = process.env.MONGO_URI;
@@ -13,6 +13,7 @@ const mongoPass = process.env.MONGO_PASSWORD;
 const mongoDbName = process.env.MONGO_DB_NAME;
 
 require("./models/user");
+require("./models/book");
 const option = {
   socketTimeoutMS: 30000,
   keepAlive: true,
@@ -31,10 +32,9 @@ const option = {
   }
 })();
 
-var indexRouter = require("./routes/index");
-var userRouter = require("./routes/user");
+const indexRouter = require("./routes/index");
 
-var app = express();
+const app = express();
 
 app.use(logger("dev"));
 app.use(express.json());
@@ -42,57 +42,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use("/", indexRouter);
-app.use("/auth", userRouter);
-app.use("/api/meta", (req, res, next) => {
-  res.send([
-    {
-      id: 9780439023480,
-      isbn: "439023483",
-      isbn13: "9780439023480",
-      authors: "Suzanne Collins",
-      year: 2008,
-      title: "The Hunger Games",
-      description:
-        "Voluptatem aut sit consequatur accusantium perferendis. Perferendis sit voluptatem accusantium aut consequatur. Perferendis aut sit consequatur voluptatem accusantium. Sit consequatur voluptatem aut perferendis accusantium.",
-    },
-    {
-      id: 9780439554930,
-      isbn: "439554934",
-      isbn13: "9780439554930",
-      authors: "J.K. Rowling, Mary GrandPré",
-      year: 1997,
-      title: "Harry Potter and the Philosopher's Stone",
-      description:
-        "Voluptatem sit aut accusantium perferendis consequatur. Aut perferendis consequatur accusantium sit voluptatem. Aut accusantium perferendis voluptatem consequatur sit. Perferendis sit consequatur accusantium voluptatem aut.",
-    },
-  ]);
-});
+require("./routes/user")(app);
+require("./routes/book")(app);
 
-app.use("/api/ratings", (req, res, next) => {
-  res.send([
-    {
-      id: 9780439023480,
-      rating: 4.34,
-    },
-    {
-      id: 9780439554930,
-      rating: 4.44,
-    },
-  ]);
-});
-
-app.use("/api/images", (req, res, next) => {
-  res.send([
-    {
-      id: 9780439023480,
-      image: "https://images.gr-assets.com/books/1447303603m/2767052.jpg",
-    },
-    {
-      id: 9780439554930,
-      image: "https://images.gr-assets.com/books/1474154022m/3.jpg",
-    },
-  ]);
-});
 app.use("/api/book-progress/:username", (req, res, next) => {
   username = req.params.id;
   res.send([
