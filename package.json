@@ -7,7 +7,8 @@
     "client": "npm run start:app --prefix client",
     "dev": "npm-run-all --parallel server client",
     "bootstrap": "npm install --prefix client && npm run bootstrap --prefix client && npm run build:components --prefix client",
-    "rebuild": "npm run build:components --prefix client"
+    "rebuild": "npm run build:components --prefix client",
+    "clean:mongo": "rm -rf seed/mongo-volume"
   },
   "dependencies": {
     "bcrypt": "^5.0.0",
