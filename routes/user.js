@@ -1,4 +1,4 @@
-const { register } = require("../controllers/user.js");
+const { register } = require("../services/user.js");
 
 module.exports = (app) => {
   app.post("/auth/login", function (req, res, next) {

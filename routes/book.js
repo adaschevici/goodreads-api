@@ -3,7 +3,7 @@ const Book = mongoose.model("Book");
 const Rating = mongoose.model("Rating");
 const Image = mongoose.model("Image");
 
-const { save } = require("../controllers/book.js");
+const { save } = require("../services/book.js");
 
 module.exports = (app) => {
   app.get("/api/books", async (req, res, next) => {
