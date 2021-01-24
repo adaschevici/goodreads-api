@@ -3,22 +3,19 @@
 const secret = process.env.JWT_SECRET;
 const mongoose = require("mongoose"),
   jwt = require("jsonwebtoken"),
-  bcrypt = require("bcrypt"),
   User = mongoose.model("User");
 
 exports.register = async function ({ fullName, email, password }) {
-  const newUser = new User({ fullName, email });
-  newUser.passwordHash = bcrypt.hashSync(password, 10);
-  newUser.save(function (err, user) {
-    if (err) {
-      return {
-        message: err,
-      };
-    } else {
-      user.passwordHash = undefined;
-      return user;
-    }
-  });
+  const newUser = new User({ fullName, email, passwordHash: password });
+  try {
+    const user = await newUser.save();
+    user.passwordHash = undefined;
+    return user;
+  } catch (err) {
+    return {
+      message: err,
+    };
+  }
 };
 
 exports.login = async function ({ email, password }) {
