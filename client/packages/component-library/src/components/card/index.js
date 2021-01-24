@@ -42,7 +42,7 @@ export default ({
             <Select
               id="book-action"
               name="book-action"
-              defaultValue="Not reading..."
+              defaultValue="not-started"
               onChange={(evt) => onStarted(bookId, evt.target.value)}
               sx={{
                 borderRadius: 5,
