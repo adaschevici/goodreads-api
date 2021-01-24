@@ -50,11 +50,11 @@ module.exports = (app) => {
     res.send([
       {
         id: 9780439023480,
-        image: "https://images.gr-assets.com/books/1447303603m/2767052.jpg",
+        url: "https://images.gr-assets.com/books/1447303603m/2767052.jpg",
       },
       {
         id: 9780439554930,
-        image: "https://images.gr-assets.com/books/1474154022m/3.jpg",
+        url: "https://images.gr-assets.com/books/1474154022m/3.jpg",
       },
     ]);
   });

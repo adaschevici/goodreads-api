@@ -5,6 +5,7 @@ const { Schema } = mongoose;
  * Book Schema
  */
 const bookSchema = new Schema({
+  id: { type: Number, unique: true },
   isbn: {
     type: String,
     unique: true,

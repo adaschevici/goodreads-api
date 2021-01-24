@@ -18,7 +18,7 @@ const actions = [
 ]
 
 export default ({
-  image,
+  url,
   title,
   description,
   rating,
@@ -34,7 +34,7 @@ export default ({
         boxShadow: '0 0 16px rgba(0, 0, 0, .25)',
       }}
     >
-      <Image src={image} />
+      <Image src={url} />
       <Box p={2}>
         <BeautyStars value={rating} />
         {authenticated && (
@@ -43,7 +43,7 @@ export default ({
               id="book-action"
               name="book-action"
               defaultValue="Not reading..."
-              onChange={evt => onStarted(bookId, evt.target.value)}
+              onChange={(evt) => onStarted(bookId, evt.target.value)}
               sx={{
                 borderRadius: 5,
               }}
