@@ -14,6 +14,9 @@ const mongoDbName = process.env.MONGO_DB_NAME;
 
 require("./models/user");
 require("./models/book");
+require("./models/image");
+require("./models/rating");
+
 const option = {
   socketTimeoutMS: 30000,
   keepAlive: true,
