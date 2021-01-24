@@ -6,7 +6,7 @@ const Image = mongoose.model("Image");
 const { save } = require("../controllers/book.js");
 
 module.exports = (app) => {
-  app.get("/api/meta", async (req, res, next) => {
+  app.get("/api/books", async (req, res, next) => {
     const books = await Book.find({}).limit(100);
     res.send(books);
   });

@@ -7,7 +7,7 @@ const client = axios.create({
 })
 
 export function fetchMeta() {
-  return client.get('/api/meta')
+  return client.get('/api/books')
 }
 
 export function fetchRating() {
