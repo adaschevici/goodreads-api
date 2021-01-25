@@ -21,6 +21,12 @@ export const getBooksProgress = createSelector(
   (books, booksInProgress) => {
     if (!booksInProgress) return []
     const books_ids = booksInProgress.map((book) => book.book_id)
-    return books.filter((book) => books_ids.includes(book.book_id))
+    const filteredBooks = books.filter((book) => {
+      if (books_ids.includes(book.book_id)) {
+        book.progress = 'reading'
+      }
+      return books_ids.includes(book.book_id)
+    })
+    return filteredBooks
   }
 )

@@ -8,8 +8,8 @@ const { Artifika, Body } = typography
 
 const actions = [
   {
-    key: 'start-reading',
-    name: 'Start reading...',
+    key: 'reading',
+    name: 'Currently reading...',
   },
   {
     key: 'not-started',
@@ -25,6 +25,7 @@ export default ({
   onStarted,
   id,
   authenticated,
+  progress = 'not-started',
 }) => (
   <Box width={1}>
     <Card
@@ -42,7 +43,7 @@ export default ({
             <Select
               id="book-action"
               name="book-action"
-              defaultValue="not-started"
+              value={progress}
               onChange={(evt) => onStarted(id, evt.target.value)}
               sx={{
                 borderRadius: 5,
