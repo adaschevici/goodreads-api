@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Box, Card, Button, Flex } from 'rebass'
+import { Box, Card, Button, Flex, Link } from 'rebass'
 import { Label, Input } from '@rebass/forms'
 import { typography } from '../../typography'
 import theme from '../../theme'
@@ -21,7 +21,7 @@ export default class Register extends Component {
   }
 
   render() {
-    const { onRegister } = this.props
+    const { onRegister, githubAuthUrl } = this.props
     const { fullName, email, password, rePassword } = this.state
     return (
       <Flex
@@ -112,6 +112,18 @@ export default class Register extends Component {
               >
                 Register
               </Button>
+            </Box>
+            <Box p={2} width={[1]}>
+              <Link href={githubAuthUrl}>
+                <Button
+                  width={[1]}
+                  mr={2}
+                  onClick={() => {}}
+                  sx={{ backgroundColor: theme.colors.blues[1] }}
+                >
+                  Sign up with Github
+                </Button>
+              </Link>
             </Box>
           </Card>
         </Box>

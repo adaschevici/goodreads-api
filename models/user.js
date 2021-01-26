@@ -5,27 +5,25 @@ const SALT_WORK_FACTOR = 10;
 /**
  * User Schema
  */
-const userSchema = new Schema({
-  fullName: {
-    type: String,
-    trim: true,
-    required: true,
+const userSchema = new Schema(
+  {
+    email: { type: String, unique: true },
+    passwordHash: String,
+    passwordResetToken: String,
+    passwordResetExpires: Date,
+    emailVerificationToken: String,
+    emailVerified: Boolean,
+
+    github: String,
+    tokens: Array,
+
+    profile: {
+      name: String,
+      picture: String,
+    },
   },
-  email: {
-    type: String,
-    unique: true,
-    lowercase: true,
-    trim: true,
-    required: true,
-  },
-  passwordHash: {
-    type: String,
-  },
-  created: {
-    type: Date,
-    default: Date.now,
-  },
-});
+  { timestamps: true }
+);
 
 userSchema.pre("save", function (next) {
   const user = this;
@@ -41,4 +39,6 @@ userSchema.methods.comparePassword = function (password) {
   return bcrypt.compareSync(password, this.passwordHash);
 };
 
-mongoose.model("User", userSchema);
+const User = mongoose.model("User", userSchema);
+
+module.exports = User;

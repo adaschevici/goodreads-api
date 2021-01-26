@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Box, Card, Button, Flex } from 'rebass'
+import { Box, Card, Button, Flex, Link } from 'rebass'
 import { Label, Input } from '@rebass/forms'
 import { typography } from '../../typography'
 import theme from '../../theme'
@@ -19,7 +19,7 @@ export default class Login extends Component {
   }
 
   render() {
-    const { onLogin } = this.props
+    const { onLogin, githubAuthUrl } = this.props
     const { email, password } = this.state
     return (
       <Flex
@@ -77,6 +77,18 @@ export default class Login extends Component {
               >
                 Login
               </Button>
+            </Box>
+            <Box p={2} width={[1]}>
+              <Link href={githubAuthUrl}>
+                <Button
+                  width={[1]}
+                  mr={2}
+                  onClick={() => {}}
+                  sx={{ backgroundColor: theme.colors.blues[1] }}
+                >
+                  Login with Github
+                </Button>
+              </Link>
             </Box>
           </Card>
         </Box>

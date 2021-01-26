@@ -1,3 +1,4 @@
+const passport = require("passport");
 const jwt = require("jsonwebtoken");
 const { register, login } = require("../services/user.js");
 
@@ -20,33 +21,38 @@ const withAuth = (req, res, next) => {
 };
 
 module.exports = (app) => {
-  app.post("/auth/login", async function (req, res, next) {
-    const { email, password } = req.body;
-    try {
-      const token = await login({ email, password });
-      if (!token) {
-        throw Error("Token is null");
-      }
-      return res
-        .cookie("token", token, { httpOnly: true })
-        .sendStatus(200)
-        .json({ msg: "Token successfully generated" });
-    } catch (e) {
-      /* handle error */
-      return res
-        .status(401)
-        .json({ msg: "Invalid Email + Password combination" });
+  app.post(
+    "/auth/register",
+    passport.authenticate("local-signup", {
+      passReqToCallback: true,
+      failureRedirect: "/register", // redirect back to the signup page if there is an error
+    }),
+    (req, res) => {
+      return res.status(200).json({ urlRedirect: "/" });
     }
+  );
+  app.post("/auth/login", passport.authenticate("local-login"), (req, res) => {
+    console.log(req.user);
+    return res.status(200).json({ msg: "Successful login" });
   });
 
-  app.post("/auth/register", async function (req, res, next) {
-    const { fullName, email, password, rePassword } = req.body;
-    if (password !== rePassword) throw Error("Confirm pass not matching");
-    const response = await register({ fullName, email, password });
-    return res
-      .status(200)
-      .json({ msg: "User succesfully registered", response });
-  });
+  app.get(
+    "/auth/github",
+    passport.authenticate("github", {
+      scope: ["user:email"],
+    })
+  );
+
+  app.get(
+    "/auth/github/callback",
+    passport.authenticate("github"),
+    (req, res) => {
+      const { accessToken } = req.user.tokens[0];
+      res.cookie("token", accessToken, { httpOnly: true });
+      res.cookie("type", "github");
+      res.redirect("/");
+    }
+  );
 
   app.post("/auth/check-token", withAuth, function (req, res, next) {
     const { email } = req;
