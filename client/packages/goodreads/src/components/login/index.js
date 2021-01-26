@@ -25,7 +25,11 @@ class DashboardLogin extends Component {
     return (
       <Fragment>
         <NavBar />
-        {success ? <Redirect to="/" /> : <Login onLogin={this.handleLogin} />}
+        {success ? (
+          <Redirect to="/" />
+        ) : (
+          <Login onLogin={this.handleLogin} githubAuthUrl="/auth/github" />
+        )}
       </Fragment>
     )
   }

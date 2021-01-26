@@ -16,7 +16,7 @@ const Routes = ({ store }) => (
           <Route
             exact
             path="/"
-            render={(props) => (
+            render={props => (
               <AuthCheck>
                 <App {...props} />
               </AuthCheck>
@@ -25,7 +25,7 @@ const Routes = ({ store }) => (
           <Route
             exact
             path="/login"
-            render={(props) => (
+            render={props => (
               <AuthCheck>
                 <DashboardLogin {...props} />
               </AuthCheck>
@@ -34,7 +34,7 @@ const Routes = ({ store }) => (
           <Route
             exact
             path="/register"
-            render={(props) => (
+            render={props => (
               <AuthCheck>
                 <DashboardRegister {...props} />
               </AuthCheck>

@@ -23,7 +23,10 @@ class DashboardRegister extends Component {
     return (
       <Fragment>
         <NavBar />
-        <Register onRegister={this.handleRegister} />
+        <Register
+          onRegister={this.handleRegister}
+          githubAuthUrl="/auth/github"
+        />
       </Fragment>
     )
   }

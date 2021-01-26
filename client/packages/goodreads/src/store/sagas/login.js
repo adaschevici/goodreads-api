@@ -46,6 +46,7 @@ export const watchRegistration = function* watchPerformRegistration({
 }) {
   try {
     const { data } = yield call(api.createUser, payload)
+    console.log(data)
     yield put({
       type: REGISTRATION_SUCCEEDED,
       payload: {
