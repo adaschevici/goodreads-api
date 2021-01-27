@@ -18,7 +18,7 @@ app.use(cookieParser());
 app.use("/", indexRouter);
 app.use("/auth", userRouter);
 app.use("/api/meta", (req, res, next) => {
-  res.send([
+  res.json([
     {
       id: 9780439023480,
       isbn: "439023483",
@@ -43,7 +43,7 @@ app.use("/api/meta", (req, res, next) => {
 });
 
 app.use("/api/ratings", (req, res, next) => {
-  res.send([
+  res.json([
     {
       id: 9780439023480,
       rating: 4.34,
@@ -56,7 +56,7 @@ app.use("/api/ratings", (req, res, next) => {
 });
 
 app.use("/api/images", (req, res, next) => {
-  res.send([
+  res.json([
     {
       id: 9780439023480,
       image: "https://images.gr-assets.com/books/1447303603m/2767052.jpg",
@@ -69,7 +69,7 @@ app.use("/api/images", (req, res, next) => {
 });
 app.use("/api/book-progress/:username", (req, res, next) => {
   username = req.params.id;
-  res.send([
+  res.json([
     {
       id: 9780439023480,
       progress: 0,
@@ -94,7 +94,7 @@ app.use(function (err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.send({ msg: "error_cucamanga" });
+  res.json({ msg: "error_cucamanga" });
 });
 
 module.exports = app;
