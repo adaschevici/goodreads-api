@@ -11,15 +11,15 @@ const { save } = require("../services/book.js");
 module.exports = (app) => {
   app.get("/api/books", async (req, res, next) => {
     const books = await Book.find({}).cache().limit(100);
-    res.send(books);
+    res.json(books);
   });
 
   app.post("/api/books", cleanCache, async (req, res, next) => {
     try {
       const response = await save(req.body);
-      res.send(response);
+      res.json(response);
     } catch (err) {
-      res.send(400, err);
+      res.status(400).json({ err });
     }
   });
 
@@ -27,10 +27,10 @@ module.exports = (app) => {
     username = req.params.username;
     try {
       const user = await User.findOne({ email: req.params.username });
-      res.send(user.booksInProgress);
+      res.json(user.booksInProgress);
     } catch (err) {
       console.log(err);
-      res.status(400).send(err);
+      res.status(400).json({ err });
     }
   });
 
@@ -44,20 +44,20 @@ module.exports = (app) => {
         { $push: { booksInProgress: { book_id: id, progress } } }
       );
       const user = await User.findOne({ email: req.params.username });
-      res.send(user.booksInProgress);
+      res.json(user.booksInProgress);
     } catch (err) {
       console.log(err);
-      res.status(400).send(err);
+      res.status(400).json({ err });
     }
   });
 
   app.get("/api/ratings", async (req, res, next) => {
     const ratings = await Rating.find({}).limit(100);
-    res.send(ratings);
+    res.json(ratings);
   });
 
   app.get("/api/images", async (req, res, next) => {
     const images = await Image.find({}).limit(100);
-    res.send(images);
+    res.json(images);
   });
 };
