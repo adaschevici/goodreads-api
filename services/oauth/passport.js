@@ -3,9 +3,7 @@ const { Strategy: LocalStrategy } = require("passport-local");
 const { Strategy: GitHubStrategy } = require("passport-github2");
 const _ = require("lodash");
 const moment = require("moment");
-const jwt = require("jsonwebtoken");
 
-const secret = process.env.JWT_SECRET;
 const User = require("../../models/User");
 
 passport.serializeUser((user, done) => {
@@ -81,6 +79,7 @@ passport.use(
 
       // find a user whose email is the same as the forms email
       // we are checking to see if the user trying to login already exists
+      console.log(email);
       User.findOne({ email }, function (err, user) {
         // if there are any errors, return the error before anything else
         if (err) return done(err);
@@ -102,14 +101,7 @@ passport.use(
           ); // create the loginMessage and save it to session as flashdata
 
         // all is well, return successful user
-        return done(null, {
-          ...user,
-          token: jwt.sign(
-            { email: user.email, fullName: user.fullName },
-            secret,
-            { expiresIn: "1h" }
-          ),
-        });
+        return done(null, user);
       });
     }
   )
